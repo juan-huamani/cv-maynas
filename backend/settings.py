@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6@0ox_35tjod21^2!g)0i+6uef4k=qnf4r2!ucs_)v65%_5vu=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cv.munimaynas.gob.pe']
 
 
 # Application definition
@@ -158,7 +158,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+#local
 STATIC_URL = 'static/'
+
+#Produccion
+# STATIC_URL = 'static/'
+# MEDIA_URL = "media/"
+
+# STATIC_ROOT = "/home/munimaynas/cv.munimaynas.gob.pe/static"
+# MEDIA_ROOT = "/home/munimaynas/cv.munimaynas.gob.pe/media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
