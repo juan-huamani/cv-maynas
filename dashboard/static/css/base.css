@@ -1,0 +1,40 @@
+/* home.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+aside {
+    background-color: #d8d3d3;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 15%; /* Ancho del aside (ajusta según tus preferencias) */
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main {
+    width: 90%; /* Ancho del contenido principal (ajusta según tus preferencias) */
+    padding: 10px;
+}
+
+.module {
+    margin-bottom: 20px; /* Espacio entre los módulos */
+}
+
+
+
+h2 {
+    color: #000000;
+}

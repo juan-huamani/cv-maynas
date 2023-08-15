@@ -1,0 +1,45 @@
+{% extends 'core_dash/base.html' %}
+{% load static %}
+{% block title %}
+    Idiomas
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/work_experience.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Registro de Idiomas </h1>
+    <form method="post" class="mb-8">
+        {% csrf_token %}
+        <div class="grid grid-cols-3 gap-4">
+            {% for field in languages_form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <div class="mb-4 text-center mt-4">
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Agregar</button>
+            </div>
+        </div>
+    </form>
+    {{ languages_form.errors }}
+    <h2 class="text-xl font-semibold mb-4">Idiomas Registrados:</h2>
+    <table class="w-full border border-black">
+        <tr class="bg-gray-200">
+            <th class="py-2 px-4 text-center border">Nombre</th>
+            <th class="py-2 px-4 border">Nivel</th>
+            <th class="py-2 px-4 border">Opcion</th>
+        </tr>
+        {% for idioma in idiomas %}
+        <tr class="border-t">
+            <td class="py-2 px-4 border text-center">{{ idioma.language_fk.name }}</td>
+            <td class="py-2 px-4 border text-center">{{ idioma.language_fk.level_fk.name }}</td>
+            <td class="py-2 px-4 border text-center"><a href="{% url 'eliminar_language' idioma.idioma_id %}" class="text-red-600 hover:text-red-800">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

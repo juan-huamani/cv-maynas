@@ -1,0 +1,38 @@
+{% extends 'core_dash/base.html' %}
+{% load static %}
+{% block title %}
+    Datos Personales
+{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Datos Personales</h1>
+    <form class="mb-8" method="post">
+        {% csrf_token %}
+        
+        <div class="grid grid-cols-4 gap-4">
+            {% for field in person_form %}
+                <div class="mb-2">
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            
+            {% for field in documentation_form %}
+                <div class="mb-2">
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mt-6 text-center">
+            <input type="submit" value="Actualizar Datos" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        </div>
+    </form>
+    
+    {{ person_form.errors }}
+    {{ documentation_form.errors }}
+</div>
+
+{% endblock %}

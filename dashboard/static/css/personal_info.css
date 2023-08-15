@@ -1,0 +1,52 @@
+
+
+form {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten a la pantalla en pantallas pequeñas */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-direction: column;
+}
+
+
+.container-register-person {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el formulario */
+    align-items: center; /* Centra verticalmente el formulario */
+    height: 100%;
+}
+
+form h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+form input,
+form select {
+    flex: 1; /* Los inputs y selects ocuparán el mismo ancho en una fila */
+    padding: 3px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form label {
+    margin-bottom: 10px;
+}
+
+form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    display: block; /* Convertir el botón en un bloque para aplicar el margen */
+    margin: 0 auto; /* Centrar el botón dentro del formulario */
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+

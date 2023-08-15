@@ -1,0 +1,52 @@
+{% extends 'core_dash/base.html' %}
+{% load static %}
+{% block title %}
+    Educacion Profesional
+{% endblock %}
+
+{% block content %}
+<div class="py-8">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Registro de Educacion Profesional </h1>
+    <form method="post" class="mb-8">
+        {% csrf_token %}
+        <div class="grid grid-cols-5 gap-4">
+            {% for field in institution_form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            {% for field in education_form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <div class="mb-4 text-center mt-4">
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Agregar</button>
+            </div>
+        </div>
+
+    </form>
+    
+    <h2 class="text-xl font-semibold mb-4">Educacion Profesional Registradas:</h2>
+    <table class="w-full border border-black">
+        <tr class="bg-gray-200">
+            <th class="py-2 px-4 text-center border">Nombre de la Institucion</th>
+            <th class="py-2 px-4 border">Fecha de Inicio</th>
+            <th class="py-2 px-4 border">Fecha de Fin</th>
+            <th class="py-2 px-4 border">Horas Lectivas</th>
+            <th class="py-2 px-4 border">Opcion</th>
+        </tr>
+        {% for educacion in educaciones %}
+        <tr class="border-t">
+            <td class="py-2 px-4 border text-center">{{ educacion.institution_fk.name }}</td>
+            <td class="py-2 px-4 border text-center">{{ educacion.institution_start_date }}</td>
+            <td class="py-2 px-4 border text-center">{{ educacion.institution_end_date }}</td>
+            <td class="py-2 px-4 border text-center">{{ educacion.hours }}</td>
+            <td class="py-2 px-4 border text-center"><a href="{% url 'eliminar_educacion' educacion.education_id %}" class="text-red-600 hover:text-red-800">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

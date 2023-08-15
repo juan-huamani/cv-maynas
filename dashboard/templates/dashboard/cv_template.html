@@ -1,0 +1,99 @@
+{% extends 'core_dash/base_template.html' %}
+{% block content %}
+    <div class="container">
+        <div class="logo">
+            <!-- INSERT_LOGO_HERE -->
+        </div>
+        <div class="cv-titulo">
+            <h1>FORMATO DE HOJA DE VIDA</h1>
+        </div>
+        {% if person %}
+        <div class="datos-personales">
+            <h1>I. DATOS PERSONALES</h1>
+            <div class="list">
+                <label>Apellidos: {{ person.0.last_name }} </label> <br>
+                <label>Nombres: {{ person.0.first_name }} </label> <br>
+                <label>Documento de Identidad: {{ person.0.documentation_fk.number }} </label> <br>
+                <!-- <label>RUC: </label> <br> -->
+                <label>Direccion: {{ person.0.address }}</label> <br>
+                <label>Departamento: {{ person.0.departament_fk.name }}</label> <br>
+                <label>Provincia: {{ person.0.province_fk.name }}</label> <br>
+                <label>Distrito: {{ person.0.district_fk.name }}</label> <br>
+                <label>Telefono: {{ person.0.phone }}</label> <br>
+                <label>Correo Electronico: {{ person.0.email }}</label> <br>
+            </div>    
+        </div>
+        {% endif %}
+        <div class="educacion">
+            <h1>II. EDUCACION</h1>
+            <table class="tabla-bordes-negros">
+                <tr>
+                    <th>Institucion</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Termino</th>
+                </tr>
+                {% for e in education_without_hours %}
+                <tr>
+                    <td>{{ e.institution_fk.name }}</td>
+                    <td>{{ e.institution_start_date }}</td>
+                    <td>{{ e.institution_end_date }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="educacion">
+            <h1>III. CAPACITACION</h1>
+            <table class="tabla-bordes-negros">
+                <tr>
+                    <th>Nombre del Curso</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Termino</th>
+                    <th>Horas Lectivas</th>
+                </tr>
+                {% if education %}
+                {% for edu in education %}
+                <tr>
+                    <td>{{ edu.institution_fk.name }}</td>
+                    <td>{{ edu.institution_start_date }}</td>
+                    <td>{{ edu.institution_end_date }}</td>
+                    <td>{{ edu.hours }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td>-------</td>
+                    <td>-------</td>
+                    <td>-------</td>
+                    <td>-------</td>
+                </tr>
+                {% endif %}
+
+            </table>
+        </div>
+        <div class="experiencia">
+            <h1>IV. EXPERIENCIA LABORAL</h1>
+            <table class="tabla-bordes-negros">
+                <tr>
+                    <th>Nombre de la Entidad o Empresa</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Termino</th>
+                    <th>Tiempo Transcurrido</th>
+                </tr>
+                {% for ex in experience %}
+                <tr>
+                    <td>{{ ex.company_fk.name }}</td>
+                    <td>{{ ex.company_start_date }}</td>
+                    <td>{{ ex.company_end_date }}</td>
+                    <td>{{ ex.time_translated  }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="idiomas">
+            <h1>V. IDIOMA</h1>
+            {% for la in language %}
+            <label>{{ la.language_fk.name }} : {{ la.language_fk.level_fk.name }}</label> <br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

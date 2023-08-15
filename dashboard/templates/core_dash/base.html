@@ -1,0 +1,49 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock title %}</title>
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="module">
+                <a href="{% url 'home' %}"><h3>Inicio</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'personal_info' %}"><h3>Datos Personales</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'work_experience' %}"><h3>Experiencia Laboral</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'education' %}"><h3>Educacion</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'language' %}"><h3>Idioma</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'export_pdf' %}"><h3>Exportar CV</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'logout' %}"><h3>Cerrar Sesion</h3></a>
+            </div>
+        </aside>
+        
+        <main>
+            {% block content %}
+                <!-- Contenido principal de la página que extiende esta plantilla -->
+            {% endblock %}
+        </main>
+    </div>
+    
+    {% block js %}
+    <!-- Aquí enlaza tus archivos JavaScript -->
+    {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+.container {
+    margin: 0 auto;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.cv-titulo{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.cv-titulo h1 {
+    margin-bottom: 0;
+    line-height: 1; /* Puedes ajustar este valor según tu preferencia */
+}
+.cv-titulo h2{
+    font-weight: lighter;
+    line-height: 1;
+}
+.list {
+    margin-left: 20px;
+    padding: 0;
+}
+.datos-personales h1 {
+    margin: 0;
+    padding: 5px;
+    margin-left: 0;
+}
+.tabla-bordes-negros {
+    margin: 0;
+    padding: 20px;
+}
+
+.tabla-bordes-negros th, .tabla-bordes-negros td {
+    border: 1px solid black;
+    padding: 4px;
+    text-align: left;
+}
+
+.tabla-bordes-negros th {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+.educacion {
+    padding-bottom: 0;
+    padding-top: 5px;
+}
+.experiencia {
+    padding-bottom: 0;
+    padding-top: 10px;
+}
+.logo {
+    width: 150px;
+    height: 50px;
+}

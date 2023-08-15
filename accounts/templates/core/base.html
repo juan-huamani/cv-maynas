@@ -1,0 +1,25 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock title %}</title>
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/toastr.min.css' %}">
+    {% block css %}
+    {% endblock %}
+    
+
+</head>
+<body>
+    {% block content %}  
+            
+    {% endblock  %}
+    
+
+    {% comment %} <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 
+    {% block js %}
+    {% endblock %}
+</body>
+</html>
