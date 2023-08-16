@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Persons, PersonsDocumentation, PersonsType, Documents, WorkExperiences, Education, Idiomas
-from .forms import PersonRegistrationForm, PersonsDocumentationForm, WorkExperienceForm, CompanyForm, EducationForm, InstitutionForm, LanguagesForm
+from .forms import PersonRegistrationForm, PersonsDocumentationForm, WorkExperienceForm, CompanyForm, EducationForm, InstitutionForm, LanguagesForm, CapacitationForm
 
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from dateutil.relativedelta import relativedelta
+from django.core.exceptions import ValidationError
 # Create your views here.
 def home_view(request):
     # Asegúrate de que el usuario esté autenticado antes de acceder a la página home
@@ -92,8 +93,40 @@ def eliminar_experiencia(request, experiencia_id):
     experiencia.delete()
     return redirect('work_experience')
 
+def capacitation_view(request):
+    educaciones = Education.objects.filter(user_fk=request.user).exclude(hours__isnull=True)
+
+    if request.method == 'POST':
+        education_form = CapacitationForm(request.POST)
+        institution_form = InstitutionForm(request.POST)
+        if education_form.is_valid() and institution_form.is_valid():
+            institucion = institution_form.save(commit=False)
+            institucion.state_fk_id = 1
+            institucion.save()
+            educacion = education_form.save(commit=False)
+            educacion.user_fk = request.user
+            educacion.state_fk_id = 1
+            educacion.institution_fk = institucion
+            educacion.save()
+            return redirect('capacitation')
+        else:
+            try:
+                education_form.clean()  # Esto provocará la validación y posiblemente la excepción
+            except ValidationError as e:
+                error_message = e.messages[0]  # Captura el primer mensaje de error
+                return render(request, 'dashboard/capacitation.html', {'education_form': education_form,'institution_form': institution_form,'educaciones': educaciones, 'error_message': error_message})
+    else:
+        education_form = CapacitationForm()
+        institution_form = InstitutionForm()
+
+    return render(request, 'dashboard/capacitation.html', {
+        'education_form': education_form,
+        'institution_form': institution_form,
+        'educaciones': educaciones,
+    })
+
 def education_view(request):
-    educaciones = Education.objects.filter(user_fk=request.user)
+    educaciones = Education.objects.filter(user_fk=request.user).exclude(hours__isnull=False)
 
     if request.method == 'POST':
         education_form = EducationForm(request.POST)

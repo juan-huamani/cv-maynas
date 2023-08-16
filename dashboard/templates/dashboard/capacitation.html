@@ -1,15 +1,15 @@
 {% extends 'core_dash/base.html' %}
 {% load static %}
 {% block title %}
-    Educacion Profesional
+    Capacitaciones
 {% endblock %}
 
 {% block content %}
 <div class="py-8">
-    <h1 class="text-2xl font-semibold mb-4 text-center">Registro de Educacion Profesional </h1>
+    <h1 class="text-2xl font-semibold mb-4 text-center">Registro de Capacitacion </h1>
     <form method="post" class="mb-8">
         {% csrf_token %}
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-5 gap-4">
             {% for field in institution_form %}
             <div class="mb-4">
                 <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
@@ -29,12 +29,13 @@
 
     </form>
     
-    <h2 class="text-xl font-semibold mb-4">Educacion Profesional Registradas:</h2>
+    <h2 class="text-xl font-semibold mb-4">Capacitaciones Registradas:</h2>
     <table class="w-full border border-black">
         <tr class="bg-gray-200">
             <th class="py-2 px-4 text-center border">Nombre de la Institucion</th>
             <th class="py-2 px-4 border">Fecha de Inicio</th>
             <th class="py-2 px-4 border">Fecha de Fin</th>
+            <th class="py-2 px-4 border">Horas Lectivas</th>
             <th class="py-2 px-4 border">Opcion</th>
         </tr>
         {% for educacion in educaciones %}
@@ -42,9 +43,22 @@
             <td class="py-2 px-4 border text-center">{{ educacion.institution_fk.name }}</td>
             <td class="py-2 px-4 border text-center">{{ educacion.institution_start_date }}</td>
             <td class="py-2 px-4 border text-center">{{ educacion.institution_end_date }}</td>
+            <td class="py-2 px-4 border text-center">{{ educacion.hours }}</td>
             <td class="py-2 px-4 border text-center"><a href="{% url 'eliminar_educacion' educacion.education_id %}" class="text-red-600 hover:text-red-800">Eliminar</a></td>
         </tr>
         {% endfor %}
     </table>
 </div>
 {% endblock %}
+{% if error_message %}
+
+{% block js %}
+    <!-- Agrega el bloque de JavaScript para Toastr aquí -->
+    {% comment %} <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            toastr.error("{{ error_message }}");
+        });
+    </script> {% endcomment %}
+{% endblock %}
+
+{% endif %}

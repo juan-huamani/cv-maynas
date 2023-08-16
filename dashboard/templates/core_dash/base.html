@@ -5,6 +5,7 @@
     <title>{% block title %} {% endblock title %}</title>
     {% tailwind_css %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toastr.min.css' %}">
     {% block css %}
     {% endblock %}
 </head>
@@ -18,13 +19,16 @@
                 <a href="{% url 'personal_info' %}"><h3>Datos Personales</h3></a>
             </div>
             <div class="module">
-                <a href="{% url 'work_experience' %}"><h3>Experiencia Laboral</h3></a>
+                <a href="{% url 'language' %}"><h3>Idioma</h3></a>
             </div>
             <div class="module">
                 <a href="{% url 'education' %}"><h3>Educacion</h3></a>
             </div>
             <div class="module">
-                <a href="{% url 'language' %}"><h3>Idioma</h3></a>
+                <a href="{% url 'work_experience' %}"><h3>Experiencia Laboral</h3></a>
+            </div>
+            <div class="module">
+                <a href="{% url 'capacitation' %}"><h3>Capacitacion</h3></a>
             </div>
             <div class="module">
                 <a href="{% url 'export_pdf' %}"><h3>Exportar CV</h3></a>
@@ -40,7 +44,8 @@
             {% endblock %}
         </main>
     </div>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 
     {% block js %}
     <!-- Aquí enlaza tus archivos JavaScript -->
     {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}

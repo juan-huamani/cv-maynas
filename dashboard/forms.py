@@ -51,6 +51,19 @@ class CompanyForm(forms.ModelForm):
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
+        fields = ['institution_start_date', 'institution_end_date']
+        widgets = {
+            'institution_start_date': forms.DateInput(attrs={'type': 'date'}),
+            'institution_end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+        labels = {
+            'institution_start_date': 'Fecha de Inicio',
+            'institution_end_date': 'Fecha de Fin',
+        }
+
+class CapacitationForm(forms.ModelForm):
+    class Meta:
+        model = Education
         fields = ['hours','institution_start_date', 'institution_end_date']
         widgets = {
             'institution_start_date': forms.DateInput(attrs={'type': 'date'}),
@@ -60,6 +73,11 @@ class EducationForm(forms.ModelForm):
             'hours': 'Horas Lectivas',
             'institution_start_date': 'Fecha de Inicio',
             'institution_end_date': 'Fecha de Fin',
+        }
+        error_messages = {
+            'hours': {
+                'required': 'Este campo es obligatorio. Por favor ingresa las horas lectivas.',
+            },
         }
 
 class InstitutionForm(forms.ModelForm):

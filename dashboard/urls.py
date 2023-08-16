@@ -12,6 +12,8 @@ urlpatterns = [
     # Education
     path('education/', views.education_view, name='education'),
     path('eliminar_educacion/<int:educacion_id>/', views.eliminar_educacion, name='eliminar_educacion'),
+    # Capacitation
+    path('capacitation/', views.capacitation_view, name='capacitation'),
     # Language
     path('language/', views.language_view, name='language'),
     path('eliminar_language/<int:language_id>/', views.eliminar_language, name='eliminar_language'),
