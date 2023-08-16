@@ -16,9 +16,11 @@ def home_view(request):
 
 def personal_info_view(request):
     try:
-        person = Persons.objects.get(user_fk=request.user)
+        person = Persons.objects.get(user_fk=request.user.id)
+        # person_attributes = vars(person)
+        # print(person_attributes)
+        documentation = PersonsDocumentation.objects.get(documentation_id=person.documentation_fk_id)
 
-        documentation = PersonsDocumentation.objects.get(document_fk=person.documentation_fk.document_fk)
     except (Persons.DoesNotExist, PersonsDocumentation.DoesNotExist):
         person = None
         documentation = None

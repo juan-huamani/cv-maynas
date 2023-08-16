@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6@0ox_35tjod21^2!g)0i+6uef4k=qnf4r2!ucs_)v65%_5vu=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cv.munimaynas.gob.pe']
+ALLOWED_HOSTS = ['cv.munimaynas.gob.pe','127.0.0.1']
 
 
 # Application definition
