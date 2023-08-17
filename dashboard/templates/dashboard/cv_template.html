@@ -24,8 +24,14 @@
             </div>    
         </div>
         {% endif %}
+        <div class="idiomas">
+            <h1>II. IDIOMA</h1>
+            {% for la in language %}
+            <label>{{ la.language_fk.name }} : {{ la.language_fk.level_fk.name }}</label> <br>
+            {% endfor %}
+        </div>
         <div class="educacion">
-            <h1>II. EDUCACION</h1>
+            <h1>III. EDUCACION</h1>
             <table class="tabla-bordes-negros">
                 <tr>
                     <th>Institucion</th>
@@ -42,7 +48,7 @@
             </table>
         </div>
         <div class="educacion">
-            <h1>III. CAPACITACION</h1>
+            <h1>IV. CAPACITACION</h1>
             <table class="tabla-bordes-negros">
                 <tr>
                     <th>Nombre del Curso</th>
@@ -71,7 +77,7 @@
             </table>
         </div>
         <div class="experiencia">
-            <h1>IV. EXPERIENCIA LABORAL</h1>
+            <h1>V. EXPERIENCIA LABORAL</h1>
             <table class="tabla-bordes-negros">
                 <tr>
                     <th>Nombre de la Entidad o Empresa</th>
@@ -88,12 +94,6 @@
                 </tr>
                 {% endfor %}
             </table>
-        </div>
-        <div class="idiomas">
-            <h1>V. IDIOMA</h1>
-            {% for la in language %}
-            <label>{{ la.language_fk.name }} : {{ la.language_fk.level_fk.name }}</label> <br>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

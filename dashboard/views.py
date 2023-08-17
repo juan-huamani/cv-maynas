@@ -7,7 +7,9 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from dateutil.relativedelta import relativedelta
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required
 def home_view(request):
     # Asegúrate de que el usuario esté autenticado antes de acceder a la página home
     if request.user.is_authenticated:
@@ -15,6 +17,7 @@ def home_view(request):
     else:
         return redirect('login')  # Redirige al usuario al inicio de sesión si no está autenticado
 
+@login_required
 def personal_info_view(request):
     try:
         person = Persons.objects.get(user_fk=request.user.id)
@@ -61,6 +64,7 @@ def personal_info_view(request):
         'documentation_form': documentation_form,
     })
 
+@login_required
 def work_experience_view(request):
 
     experiencias = WorkExperiences.objects.filter(user_fk=request.user)
@@ -88,11 +92,13 @@ def work_experience_view(request):
         'experiencias': experiencias,
     })
 
+@login_required
 def eliminar_experiencia(request, experiencia_id):
     experiencia = get_object_or_404(WorkExperiences, pk=experiencia_id)
     experiencia.delete()
     return redirect('work_experience')
 
+@login_required
 def capacitation_view(request):
     educaciones = Education.objects.filter(user_fk=request.user).exclude(hours__isnull=True)
 
@@ -125,6 +131,7 @@ def capacitation_view(request):
         'educaciones': educaciones,
     })
 
+@login_required
 def education_view(request):
     educaciones = Education.objects.filter(user_fk=request.user).exclude(hours__isnull=False)
 
@@ -151,11 +158,13 @@ def education_view(request):
         'educaciones': educaciones,
     })
 
+@login_required
 def eliminar_educacion(request, educacion_id):
     educacion = get_object_or_404(Education, pk=educacion_id)
     educacion.delete()
     return redirect('education')
 
+@login_required
 def language_view(request):
     idiomas = Idiomas.objects.filter(user_fk=request.user)
     if request.method == 'POST':
@@ -177,12 +186,13 @@ def language_view(request):
         'idiomas': idiomas,
     })
 
+@login_required
 def eliminar_language(request, language_id):
     language = get_object_or_404(Idiomas, pk=language_id)
     language.delete()
     return redirect('language')
 
-
+@login_required
 def export_to_pdf(request):
     
     #education = Education.objects.filter(user_fk=request.user)
@@ -211,7 +221,7 @@ def export_to_pdf(request):
         request.build_absolute_uri('/static/css/template.css')
     )
     img_tag = '<img src="{}" alt="Logo">'.format(
-        request.build_absolute_uri('/static/img/logo.jpg')
+        request.build_absolute_uri('/static/img/logo.png')
     )
     
     # Reemplaza el lugar donde deseas que aparezca la imagen en el HTML generado

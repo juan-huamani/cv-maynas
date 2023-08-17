@@ -5,7 +5,8 @@
 {% block content %} 
 <div class="flex items-center justify-center h-screen">
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
-        <h1 class="text-2xl font-bold mb-4">Iniciar sesión</h1>
+        <h1 class="text-2xl font-bold mb-4 text-center">Iniciar sesión</h1>
+        <img src="{% static 'img/municv.png' %}" alt="Imagen de inicio" class="w-50 h-32 mx-auto mb-4">
         <form method="post" class="space-y-4">
             {% csrf_token %}
             <div class="flex flex-col">
@@ -16,7 +17,7 @@
                 <label for="{{ form.password.id_for_label }}" class="mb-1">Contraseña:</label>
                 {{ form.password }}
             </div>
-            <input type="submit" value="Iniciar sesión" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <input type="submit" value="Ingresa" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
             <p class="mt-2">¿No tienes una cuenta? <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Regístrate</a></p>
         </form>
     </div>
