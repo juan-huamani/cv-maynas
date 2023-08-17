@@ -3,20 +3,25 @@
 {% block title %} Iniciar sesión {% endblock title %}
 
 {% block content %} 
-<h1 class="text-2xl font-bold mb-4">Iniciar sesión</h1>
-<form method="post" class="space-y-4">
-    {% csrf_token %}
-    <div class="flex flex-col">
-        <label for="{{ form.username.id_for_label }}" class="mb-1">Correo Electronico:</label>
-        {{ form.username }}
+<div class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">Iniciar sesión</h1>
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <div class="flex flex-col">
+                <label for="{{ form.username.id_for_label }}" class="mb-1">Correo Electronico:</label>
+                {{ form.username }}
+            </div>
+            <div class="flex flex-col">
+                <label for="{{ form.password.id_for_label }}" class="mb-1">Contraseña:</label>
+                {{ form.password }}
+            </div>
+            <input type="submit" value="Iniciar sesión" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            <p class="mt-2">¿No tienes una cuenta? <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Regístrate</a></p>
+        </form>
     </div>
-    <div class="flex flex-col">
-        <label for="{{ form.password.id_for_label }}" class="mb-1">Contraseña:</label>
-        {{ form.password }}
-    </div>
-    <input type="submit" value="Iniciar sesión" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-    <p class="mt-2">¿No tienes una cuenta? <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Regístrate</a></p>
-</form>
+</div>
+
 {% endblock %}
 {% block js %}
 <script>

@@ -121,18 +121,15 @@ class Institutions(models.Model):
         db_table = 'institutions'
 
 class Education(models.Model):
-    
-    @staticmethod
-    def validate_only_numbers(value):
-        if not value.isdigit():
-            raise ValidationError('Ingrese solo números.')
-        
+
+    numeric_validator = RegexValidator(r'^[0-9]*$', 'Only numeric characters are allowed.')    
+
     education_id = models.AutoField(primary_key=True, db_comment='The unique identifier for the education')
     user_fk = models.ForeignKey(Users, models.DO_NOTHING, db_column='user_fk', db_comment='Foreign key referencing the user associated with this person')
     institution_fk = models.ForeignKey(Institutions, models.DO_NOTHING, db_column='institution_fk')
     institution_start_date = models.DateField(db_comment='The start date at the institution for this CV record')
     institution_end_date = models.DateField(db_comment='The end date at the institution for this CV record')
-    hours = models.CharField(max_length=3,blank=True, null=True, db_comment='The duration of education in hours',validators=[validate_only_numbers])
+    hours = models.CharField(max_length=3,blank=True, null=True, db_comment='The duration of education in hours', validators=[numeric_validator])
     state_fk = models.ForeignKey(States, models.DO_NOTHING, db_column='state_fk', db_comment='"Foreign key referencing the state of the company in the states table.')
 
     class Meta:
